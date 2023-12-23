@@ -7,24 +7,59 @@
     "text": "About this blog"
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "posts/quarto/index.html",
+    "href": "posts/quarto/index.html",
+    "title": "Hello, Quarto",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "In this post, we’ll get set up with Quarto.\nQuarto is a static site converter, which you can use to turn plaintext documents into attractive webpages. You should have already installed Quarto and signed up for GitHub when completing the software installation (details in BruinLearn)."
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code."
+    "objectID": "posts/quarto/index.html#make-a-github-repository",
+    "href": "posts/quarto/index.html#make-a-github-repository",
+    "title": "Hello, Quarto",
+    "section": "Make a GitHub repository",
+    "text": "Make a GitHub repository\nLet’s first make a GitHub repository to host your blog.\n\nFrom your user page (https://github.com/&lt;your_user_name&gt;), click on the Repositories tab.\nClick on New button.\nCreate a new repository. Carefully choose your repository name, and make sure not to select Add a README file to create a completely empty repository."
+  },
+  {
+    "objectID": "posts/quarto/index.html#generate-blog-files-using-quarto",
+    "href": "posts/quarto/index.html#generate-blog-files-using-quarto",
+    "title": "Hello, Quarto",
+    "section": "Generate blog files using Quarto",
+    "text": "Generate blog files using Quarto\nThis should be very straightforward using the instructions at this link.\nAll you need to do is run the following code at the terminal.\nquarto create-project myblog --type website:blog\nThen once a folder appears, run this line.\nquarto preview myblog\nFeel free to replace myblog with a different name.\nquarto preview should open up a link that looks like http://localhost:6832 in your web browser. The port number probably looks different."
+  },
+  {
+    "objectID": "posts/quarto/index.html#turn-the-generated-quarto-blog-into-a-github-repository",
+    "href": "posts/quarto/index.html#turn-the-generated-quarto-blog-into-a-github-repository",
+    "title": "Hello, Quarto",
+    "section": "Turn the generated Quarto blog into a GitHub repository",
+    "text": "Turn the generated Quarto blog into a GitHub repository\nFirst, move into your blog folder.\ncd myblog\nThen, follow the steps under “…or create a new repository on the command line” part of your GitHub repository inside your blog folder.\necho \"# &lt;your-repository-name&gt;\" &gt;&gt; README.md\ngit init\ngit add README.md\ngit commit -m \"first commit\"\ngit branch -M main\ngit remote add origin https://github.com/&lt;your-user-name&gt;/&lt;your-repository-name&gt;.git\ngit push -u origin main"
+  },
+  {
+    "objectID": "posts/quarto/index.html#publish-on-github-pages",
+    "href": "posts/quarto/index.html#publish-on-github-pages",
+    "title": "Hello, Quarto",
+    "section": "Publish on GitHub Pages",
+    "text": "Publish on GitHub Pages\nNow, run this line on your terminal in the same directory.\nquarto publish\nWhen prompted, select these options.\n? Provider: › GitHub Pages\n? Authorize (Y/n) › Yes\nFinally, the terminal should print out something like this:\nSwitched to a new branch 'gh-pages'\n[gh-pages (root-commit) 386cdba] Initializing gh-pages branch\nremote:\nremote: Create a pull request for 'gh-pages' on GitHub by visiting:\nremote:      https://github.com/kose-y/test-quarto/pull/new/gh-pages\nremote:\nTo https://github.com/kose-y/test-quarto.git\n* [new branch]      HEAD -&gt; gh-pages\nYour branch is up to date with 'origin/main'.\nSwitched to branch 'main'\nFrom https://github.com/kose-y/test-quarto\n* branch            gh-pages   -&gt; FETCH_HEAD\nRendering for publish:\n\n[1/4] posts/post-with-code/index.qmd\n[2/4] posts/welcome/index.qmd\n[3/4] index.qmd\n[4/4] about.qmd\n\nbranch 'gh-pages' set up to track 'origin/gh-pages'.\nHEAD is now at 386cdba Initializing gh-pages branch\nPreparing worktree (resetting branch 'gh-pages'; was at 386cdba)\nfatal: pathspec '.' did not match any files\n[gh-pages 1c6e662] Built site for gh-pages\n29 files changed, 6535 insertions(+)\ncreate mode 100644 .nojekyll\ncreate mode 100644 about.html\ncreate mode 100644 index.html\ncreate mode 100644 listings.json\ncreate mode 100644 posts/post-with-code/image.jpg\ncreate mode 100644 posts/post-with-code/index.html\ncreate mode 100644 posts/welcome/index.html\ncreate mode 100644 posts/welcome/thumbnail.jpg\ncreate mode 100644 profile.jpg\ncreate mode 100644 search.json\ncreate mode 100644 site_libs/bootstrap/bootstrap-icons.css\ncreate mode 100644 site_libs/bootstrap/bootstrap-icons.woff\ncreate mode 100644 site_libs/bootstrap/bootstrap.min.css\ncreate mode 100644 site_libs/bootstrap/bootstrap.min.js\ncreate mode 100644 site_libs/clipboard/clipboard.min.js\ncreate mode 100644 site_libs/quarto-html/anchor.min.js\ncreate mode 100644 site_libs/quarto-html/popper.min.js\ncreate mode 100644 site_libs/quarto-html/quarto-syntax-highlighting.css\ncreate mode 100644 site_libs/quarto-html/quarto.js\ncreatorigin https://github.com/kose-y/test-quarto.git (fetch)\norigin  https://github.com/kose-y/test-quarto.git (push)\nTo https://github.com/kose-y/test-quarto.git\n386cdba..1c6e662  HEAD -&gt; gh-pages\n\n[✓] Deploying gh-pages branch to website (this may take a few minutes)\n[✓] Published to https://kose-y.github.io/test-quarto/\nGo to the website on the last line, and if you see a webpage there, congrats! Your blog is up and running. At the moment, it’s just a copy of the template, so it’s not personalized in any way."
+  },
+  {
+    "objectID": "posts/quarto/index.html#edit-a-post",
+    "href": "posts/quarto/index.html#edit-a-post",
+    "title": "Hello, Quarto",
+    "section": "Edit a post",
+    "text": "Edit a post\nPreview your blog again:\nquarto preview\nThen edit the welcome page in posts/welcome/index.qmd. Any sort of change will do.\nOnce you save the file, you’ll see that the preview page on the web browser is automatically updated.\nYou can also add a new page following instructions in this post."
+  },
+  {
+    "objectID": "posts/quarto/index.html#publish-again",
+    "href": "posts/quarto/index.html#publish-again",
+    "title": "Hello, Quarto",
+    "section": "Publish again",
+    "text": "Publish again\nOnce you’ve made all these additions, publish the result again using quarto publish. In a few minutes, you should see your new post on your website."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "PIC16B-24W",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nDec 22, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 19, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Hello, Quarto\n\n\n\n\n\n\n\nWeek 0\n\n\n\n\n\n\n\n\n\n\n\nDec 22, 2023\n\n\n\n\n\n\nNo matching items"
   }
 ]
