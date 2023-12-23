@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-12-22">
 
-<title>PIC16B-24W - Hello, Quarto</title>
+<title>PIC16B-23F - Hello, Quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">PIC16B-24W</span>
+    <span class="navbar-title">PIC16B-23F</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/PIC16B-23F" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -166,7 +166,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#make-a-github-repository" id="toc-make-a-github-repository" class="nav-link active" data-scroll-target="#make-a-github-repository">Make a GitHub repository</a></li>
+  <li><a href="#generate-blog-files-using-quarto" id="toc-generate-blog-files-using-quarto" class="nav-link" data-scroll-target="#generate-blog-files-using-quarto">Generate blog files using Quarto</a></li>
+  <li><a href="#turn-the-generated-quarto-blog-into-a-github-repository" id="toc-turn-the-generated-quarto-blog-into-a-github-repository" class="nav-link" data-scroll-target="#turn-the-generated-quarto-blog-into-a-github-repository">Turn the generated Quarto blog into a GitHub repository</a></li>
+  <li><a href="#publish-on-github-pages" id="toc-publish-on-github-pages" class="nav-link" data-scroll-target="#publish-on-github-pages">Publish on GitHub Pages</a></li>
+  <li><a href="#edit-a-post" id="toc-edit-a-post" class="nav-link" data-scroll-target="#edit-a-post">Edit a post</a></li>
+  <li><a href="#edit-configuration" id="toc-edit-configuration" class="nav-link" data-scroll-target="#edit-configuration">Edit configuration</a></li>
+  <li><a href="#publish-again" id="toc-publish-again" class="nav-link" data-scroll-target="#publish-again">Publish again</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -276,9 +291,28 @@ To https://github.com/kose-y/test-quarto.git
 <p>Once you save the file, you’ll see that the preview page on the web browser is automatically updated.</p>
 <p>You can also add a new page following instructions in <a href="../composing">this post</a>.</p>
 </section>
+<section id="edit-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="edit-configuration">Edit configuration</h2>
+<p>The file <code>posts/_metadata.yml</code> contains shared options for the posts. It is highly recommended to modify <code>freeze: true</code> to <code>freeze: auto</code>, as you are expected to modify your posts often.</p>
+<pre><code># options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: auto
+
+# Enable banner style title blocks
+title-block-banner: true</code></pre>
+<p>Please check <a href="https://quarto.org/docs/websites/website-blog.html#freezing-posts">this page</a> for more information.</p>
+</section>
 <section id="publish-again" class="level2">
 <h2 class="anchored" data-anchor-id="publish-again">Publish again</h2>
 <p>Once you’ve made all these additions, publish the result again using <code>quarto publish</code>. In a few minutes, you should see your new post on your website.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><a href="https://quarto.org/docs/websites/website-blog.html">Official documentation on how to create Quarto blogs</a></li>
+</ul>
 
 
 </section>

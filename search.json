@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "PIC 16B - 2024 Winter Blog"
   },
   {
     "objectID": "posts/quarto/index.html",
@@ -49,11 +49,25 @@
     "text": "Edit a post\nPreview your blog again:\nquarto preview\nThen edit the welcome page in posts/welcome/index.qmd. Any sort of change will do.\nOnce you save the file, you’ll see that the preview page on the web browser is automatically updated.\nYou can also add a new page following instructions in this post."
   },
   {
+    "objectID": "posts/quarto/index.html#edit-configuration",
+    "href": "posts/quarto/index.html#edit-configuration",
+    "title": "Hello, Quarto",
+    "section": "Edit configuration",
+    "text": "Edit configuration\nThe file posts/_metadata.yml contains shared options for the posts. It is highly recommended to modify freeze: true to freeze: auto, as you are expected to modify your posts often.\n# options specified here will apply to all posts in this folder\n\n# freeze computational output\n# (see https://quarto.org/docs/projects/code-execution.html#freeze)\nfreeze: auto\n\n# Enable banner style title blocks\ntitle-block-banner: true\nPlease check this page for more information."
+  },
+  {
     "objectID": "posts/quarto/index.html#publish-again",
     "href": "posts/quarto/index.html#publish-again",
     "title": "Hello, Quarto",
     "section": "Publish again",
     "text": "Publish again\nOnce you’ve made all these additions, publish the result again using quarto publish. In a few minutes, you should see your new post on your website."
+  },
+  {
+    "objectID": "posts/quarto/index.html#references",
+    "href": "posts/quarto/index.html#references",
+    "title": "Hello, Quarto",
+    "section": "References",
+    "text": "References\n\nOfficial documentation on how to create Quarto blogs"
   },
   {
     "objectID": "index.html",
