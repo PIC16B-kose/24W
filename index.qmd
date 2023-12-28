@@ -1,5 +1,5 @@
 ---
-title: "PIC16B-24W"
+title: "UCLA PIC 16B Lec 1, Winter 2024"
 listing:
   contents: posts
   sort: "date desc"

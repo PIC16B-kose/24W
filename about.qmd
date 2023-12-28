@@ -12,8 +12,8 @@ about:
       href: https://linkedin.com
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/PIC16B-kose/24W
 
 ---
 
-About this blog
+PIC 16B - 2024 Winter Blog
