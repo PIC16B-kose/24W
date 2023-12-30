@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://PIC16B-kose.github.io/24W/about.html</loc>
-    <lastmod>2023-12-30T02:58:12.977Z</lastmod>
+    <lastmod>2023-12-30T21:44:41.479Z</lastmod>
   </url>
   <url>
     <loc>https://PIC16B-kose.github.io/24W/posts/quarto/index.html</loc>
-    <lastmod>2023-12-30T02:58:12.446Z</lastmod>
+    <lastmod>2023-12-30T21:44:40.917Z</lastmod>
+  </url>
+  <url>
+    <loc>https://PIC16B-kose.github.io/24W/posts/hw0/index.html</loc>
+    <lastmod>2023-12-30T21:44:39.232Z</lastmod>
   </url>
   <url>
     <loc>https://PIC16B-kose.github.io/24W/posts/installation/index.html</loc>
-    <lastmod>2023-12-30T02:58:10.886Z</lastmod>
+    <lastmod>2023-12-30T21:44:38.893Z</lastmod>
   </url>
   <url>
     <loc>https://PIC16B-kose.github.io/24W/posts/composing/index.html</loc>
-    <lastmod>2023-12-30T02:58:12.178Z</lastmod>
+    <lastmod>2023-12-30T21:44:40.660Z</lastmod>
   </url>
   <url>
     <loc>https://PIC16B-kose.github.io/24W/index.html</loc>
-    <lastmod>2023-12-30T02:58:12.757Z</lastmod>
+    <lastmod>2023-12-30T21:44:41.263Z</lastmod>
   </url>
 </urlset>
