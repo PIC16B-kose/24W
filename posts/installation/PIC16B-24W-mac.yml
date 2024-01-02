@@ -46,6 +46,7 @@ dependencies:
   - charset-normalizer=3.3.2=pyhd8ed1ab_0
   - click=8.1.7=unix_pyh707e725_0
   - cloudpickle=3.0.0=pyhd8ed1ab_0
+  - colorama=0.4.6=pyhd8ed1ab_0
   - comm=0.1.4=pyhd8ed1ab_0
   - constantly=15.1.0=py_0
   - contourpy=1.2.0=py311hd03642b_0
@@ -169,6 +170,7 @@ dependencies:
   - nbformat=5.9.2=pyhd8ed1ab_0
   - ncurses=6.4=h463b476_2
   - nest-asyncio=1.5.8=pyhd8ed1ab_0
+  - nltk=3.8.1=pyhd8ed1ab_0
   - notebook=6.5.4=pyha770c72_0
   - notebook-shim=0.2.3=pyhd8ed1ab_0
   - numpy=1.26.2=py311h6d074dd_0
@@ -223,6 +225,7 @@ dependencies:
   - re2=2023.06.02=h6135d0a_0
   - readline=8.2=h92ec313_1
   - referencing=0.32.0=pyhd8ed1ab_0
+  - regex=2023.12.25=py311h05b510d_0
   - requests=2.31.0=pyhd8ed1ab_0
   - requests-file=1.5.1=pyh9f0ad1d_0
   - rfc3339-validator=0.1.4=pyhd8ed1ab_0
@@ -254,6 +257,7 @@ dependencies:
   - tomli=2.0.1=pyhd8ed1ab_0
   - toolz=0.12.0=pyhd8ed1ab_0
   - tornado=6.3.3=py311heffc1b2_1
+  - tqdm=4.66.1=pyhd8ed1ab_0
   - traitlets=5.9.0=pyhd8ed1ab_0
   - twisted=22.10.0=py311he2be06e_0
   - types-python-dateutil=2.8.19.14=pyhd8ed1ab_0
@@ -282,5 +286,13 @@ dependencies:
   - zope.interface=6.1=py311h05b510d_0
   - zstd=1.5.5=h4f39d0f_0
   - pip:
-    - keras==3
+      - absl-py==2.0.0
+      - dm-tree==0.1.8
+      - gradescope-utils==0.5.0
+      - h5py==3.10.0
+      - keras==3.0.0
+      - markdown-it-py==3.0.0
+      - mdurl==0.1.2
+      - namex==0.0.7
+      - rich==13.7.0
 prefix: /Users/kose/anaconda3/envs/PIC16B-24W
