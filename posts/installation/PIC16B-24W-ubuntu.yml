@@ -364,4 +364,14 @@ dependencies:
   - zlib=1.2.13=hd590300_5
   - zope.interface=6.1=py311h459d7ec_0
   - zstd=1.5.5=hfc55251_0
+  - pip:
+    - absl-py==2.0.0
+    - dm-tree==0.1.8
+    - gradescope-utils==0.5.0
+    - h5py==3.10.0
+    - keras==3.0.0
+    - markdown-it-py==3.0.0
+    - mdurl==0.1.2
+    - namex==0.0.7
+    - rich==13.7.0
 prefix: /u/home/k/kose/.conda/envs/PIC16B-24W
