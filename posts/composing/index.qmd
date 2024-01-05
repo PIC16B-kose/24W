@@ -1,6 +1,6 @@
 ---
 title: "Creating Posts"
-date: "2023-12-23"
+date: "2023-12-30"
 image: index_files/figure-html/cell-3-output-1.png
 categories: [Week 0]
 ---

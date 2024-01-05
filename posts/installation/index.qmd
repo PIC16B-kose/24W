@@ -49,7 +49,7 @@ They are listed in a `.yml` file, depending on OS. We will fix the versions of t
 - jupyter_server=1.23.4
 - jupyterlab=3.6.3
 - notebook=6.5.4
-- jax=0.4 (through pip on Windows)
+- jax=0.4 (not available on Windows)
 - keras==3 (thorugh pip)
 
 Download `PIC16B-24W-<os>.yml` file corresponding to your OS and run the following from the Anaconda Prompt from the directory where the file is located:
@@ -59,9 +59,9 @@ conda env create -f PIC16B-24W-<os>.yml
 This will create a new environment PIC16B-24W, and I will use that environment in the lectures.
 Full environment for each OS:
 
-- [Windows]()
-- [Mac]()
-- [Ubuntu Linux]()
+- [Windows](https://raw.githubusercontent.com/PIC16B-ucla/24W/main/posts/installation/PIC16B-24W-Windows.yml)
+- [Mac](https://raw.githubusercontent.com/PIC16B-ucla/24W/main/posts/installation/PIC16B-24W-mac.yml)
+- [Ubuntu Linux](https://raw.githubusercontent.com/PIC16B-ucla/24W/main/posts/installation/PIC16B-24W-ubuntu.yml)
 
 Note that an autograder will be in use for this course, set up on Ubuntu Linux.
 
