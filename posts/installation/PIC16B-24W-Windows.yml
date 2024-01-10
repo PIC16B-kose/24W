@@ -301,4 +301,14 @@ dependencies:
   - zipp=3.17.0=pyhd8ed1ab_0
   - zope.interface=6.0=py311ha68e1ae_1
   - zstd=1.5.5=h12be248_0
+  - pip:
+      - absl-py==2.0.0
+      - dm-tree==0.1.8
+      - gradescope-utils==0.5.0
+      - h5py==3.10.0
+      - keras==3.0.0
+      - markdown-it-py==3.0.0
+      - mdurl==0.1.2
+      - namex==0.0.7
+      - rich==13.7.0
 prefix: C:\Users\kose\AppData\Local\anaconda3\envs\PIC16B-24W
