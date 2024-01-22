@@ -249,7 +249,7 @@
     "href": "posts/hw1/index.html#create-a-database",
     "title": "Homework 1: Data Wrangling and Visualization",
     "section": "1. Create a Database",
-    "text": "1. Create a Database\nFirst, create a database with three tables: temperatures, stations, and countries. Refer back to lecture notes on how to access country names and relate them to temperature readings. Keep these as three separate tables in your database. (ADDED Jan 21): Please refrain from changing column names.\nMake sure to close the database connection after you are finished constructing it."
+    "text": "1. Create a Database\nFirst, create a database with three tables: temperatures, stations, and countries. Refer back to lecture notes on how to access country names and relate them to temperature readings. Keep these as three separate tables in your database. (ADDED Jan 21): Please refrain from changing column names. For countries, create a table from this CSV file used in the lecture.\nMake sure to close the database connection after you are finished constructing it."
   },
   {
     "objectID": "posts/hw1/index.html#write-a-query-function",
