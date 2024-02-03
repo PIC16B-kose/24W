@@ -263,8 +263,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>is what I used in my template to ensure that <code>request.form["message"]</code> contained the message input by the user. You should then return the message and the handle.</p>
 <ol start="2" type="1">
-<li>Using a cursor, insert the message into the <code>message</code> database. Remember that you’ll need to provide an ID number, the handle, and the message itself. You’ll need to write a SQL command to perform the insertion. - <strong>Note</strong>: when working directly with SQL commands, it is necessary to run <code>db.commit()</code> after inserting a row into <code>db</code> in order to ensure that your row insertion has been saved. - You should ensure that the ID number of each message is unique. One way to do this is by setting the ID number of a message equal to one plus the current number of rows in <code>message_db</code>. - Don’t forget to close the database connection within the function!</li>
+<li>Using a cursor, insert the message into the <code>message</code> database. Remember that you’ll need to provide an ID number, the handle, and the message itself. You’ll need to write a SQL command to perform the insertion.</li>
 </ol>
+<pre><code>- __Note__: when working directly with SQL commands, it is necessary to run `db.commit()` after inserting a row into `db` in order to ensure that your row insertion has been saved.
+- You should ensure that the ID number of each message is unique. One way to do this is by setting the ID number of a message equal to one plus the current number of rows in `message_db`.
+- Don’t forget to close the database connection within the function!</code></pre>
 <p>Finally, write a function to <code>render_template()</code> the <code>submit.html</code> template. Since this page will both transmit and receive data, you should ensure that it supports both <code>POST</code> and <code>GET</code> methods, and give it appropriate behavior in each one. In the <code>GET</code> case, you can just render the <code>submit.html</code> template with no other parameters. In the <code>POST</code> case, you should call <code>insert_message()</code> (and then render the <code>submit.html</code> template). Maybe it would be nice to add a small note thanking the user for their submission?</p>
 </section>
 <section id="viewing-random-submissions" class="level3">
