@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>get_message_db()</code> should handle creating the database of messages.</p>
 <ol type="1">
 <li>Check whether there is a database called <code>message_db</code> in the <code>g</code> attribute of the app. If not, then connect to that database, ensuring that the connection is an attribute of <code>g</code>. To do this last step, write a line like do <code>g.message_db = sqlite3.connect("messages_db.sqlite")</code></li>
-<li>Check whether a table called <code>messages</code> exists in <code>message_db</code>, and create it if not. For this purpose, the SQL command <code>CREATE TABLE IF NOT EXISTS</code> is helpful. Give the table an <code>id</code> column (integer), a <code>handle</code> column (text), and a <code>message</code> column (text).</li>
+<li>Check whether a table called <code>messages</code> exists in <code>message_db</code>, and create it if not. For this purpose, the SQL command <code>CREATE TABLE IF NOT EXISTS</code> is helpful. Give the table <del>an <code>id</code> column (integer)</del>, a <code>handle</code> column (text), and a <code>message</code> column (text).</li>
 <li>Return the connection <code>g.message_db</code>.</li>
 <li>Here is a helpful starter code from a previous TA, Shruti:</li>
 </ol>
@@ -262,11 +262,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;input</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text"</span> <span class="er">name</span><span class="ot">=</span><span class="st">"message"</span> <span class="er">id</span><span class="ot">=</span><span class="st">"message"</span><span class="kw">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>is what I used in my template to ensure that <code>request.form["message"]</code> contained the message input by the user. You should then return the message and the handle.</p>
 <ol start="2" type="1">
-<li>Using a cursor, insert the message into the <code>message</code> database. Remember that you’ll need to provide an ID number, the handle, and the message itself. You’ll need to write a SQL command to perform the insertion.</li>
+<li>Using a cursor, insert the message into the <code>message</code> database. Remember that you’ll need to provide <del>an ID number,</del> the handle, and the message itself. You’ll need to write a SQL command to perform the insertion.</li>
 </ol>
 <ul>
 <li><strong>Note</strong>: when working directly with SQL commands, it is necessary to run <code>db.commit()</code> after inserting a row into <code>db</code> in order to ensure that your row insertion has been saved.</li>
-<li>You should ensure that the ID number of each message is unique. One way to do this is by setting the ID number of a message equal to one plus the current number of rows in <code>message_db</code>.</li>
+<li><del>You should ensure that the ID number of each message is unique. One way to do this is by setting the ID number of a message equal to one plus the current number of rows in <code>message_db</code>.</del><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 <li>Don’t forget to close the database connection within the function!</li>
 </ul></li>
 </ul>
@@ -361,7 +361,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>This should remind you of object oriented programming and inheritance from PIC16A!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Edited out 2/4: This requirement is removed, since SQLite automatically adds a <code>rowid</code> column.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Edited out 2/4: This requirement is removed, since SQLite automatically adds a <code>rowid</code> column.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
