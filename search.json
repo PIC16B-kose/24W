@@ -270,7 +270,7 @@
     "href": "posts/hw3/index.html#footnotes",
     "title": "Homework 3: Web Development",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nEdited out 2/4: This requirement is removed, since SQLite automatically adds a rowid column.↩︎\nEdited out 2/4: This requirement is removed, since SQLite automatically adds a rowid column.↩︎"
+    "text": "Footnotes\n\n\nThis should remind you of object oriented programming and inheritance from PIC16A!↩︎\nRemoved 2/4: This requirement is lifted since SQLite automatically adds a rowid column.↩︎"
   },
   {
     "objectID": "posts/hw1/index.html",
