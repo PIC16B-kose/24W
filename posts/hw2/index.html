@@ -270,7 +270,7 @@ cd TMDB_scraper</code></pre>
 <ul>
 <li><code>parse(self, response)</code> should assume that you start on a movie page, and then navigate to the <em>Full Cast &amp; Crew</em> page. Remember that this page has url <code>&lt;movie_url&gt;cast</code>. (You are allowed to hardcode that part.) Once there, the <code>parse_full_credits(self,response)</code> should be called, by specifying this method in the <code>callback</code> argument to a yielded <code>scrapy.Request</code>. The <code>parse()</code> method does not return any data. This method should be no more than 5 lines of code, excluding comments and docstrings.</li>
 <li><code>parse_full_credits(self, response)</code> should assume that you start on the <em>Full Cast &amp; Crew</em> page. Its purpose is to yield a <code>scrapy.Request</code> for the page of each actor listed on the page. Crew members are not included. The yielded request should specify the method <code>parse_actor_page(self, response)</code> should be called when the actor’s page is reached. The <code>parse_full_credits()</code> method does not return any data. This method should be no more than 5 lines of code, excluding comments and docstrings.</li>
-<li><code>parse_actor_page(self, response)</code> should assume that you start on the page of an actor. It should yield a dictionary with two key-value pairs, of the form <code>{"actor" : actor_name, "movie_or_TV_name" : movie_or_TV_name}</code>. The method should yield one such dictionary for each of the movies or TV shows on which that actor has worked in an acting role. Note that you will need to determine both the name of the actor and the name of each movie or TV show. This method should be no more than 15 lines of code, excluding comments and docstrings.</li>
+<li><code>parse_actor_page(self, response)</code> should assume that you start on the page of an actor. It should yield a dictionary with two key-value pairs, of the form <code>{"actor" : actor_name, "movie_or_TV_name" : movie_or_TV_name}</code>. The method should yield one such dictionary for each of the movies or TV shows on which that actor has worked in an “Acting” role<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Note that you will need to determine both the name of the actor and the name of each movie or TV show. This method should be no more than 15 lines of code, excluding comments and docstrings.</li>
 </ul>
 <p>Provided that these methods are correctly implemented, you can run the command</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scrapy</span> crawl tmdb_spider <span class="at">-o</span> results.csv <span class="at">-a</span> subdir=671-harry-potter-and-the-philosopher-s-stone</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -369,7 +369,13 @@ cd TMDB_scraper</code></pre>
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Only the works listed in “Acting” section of the actor page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
