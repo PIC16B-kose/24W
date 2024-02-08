@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#with-matrix-multiplication" id="toc-with-matrix-multiplication" class="nav-link active" data-scroll-target="#with-matrix-multiplication">1. With matrix multiplication</a></li>
-  <li><a href="#sparse-matrix" id="toc-sparse-matrix" class="nav-link" data-scroll-target="#sparse-matrix">2. Sparse matrix</a></li>
+  <li><a href="#sparse-matrix-in-jax" id="toc-sparse-matrix-in-jax" class="nav-link" data-scroll-target="#sparse-matrix-in-jax">2. Sparse matrix in JAX</a></li>
   <li><a href="#direct-operation-with-numpy" id="toc-direct-operation-with-numpy" class="nav-link" data-scroll-target="#direct-operation-with-numpy">3. Direct operation with <code>numpy</code></a></li>
   <li><a href="#with-jax" id="toc-with-jax" class="nav-link" data-scroll-target="#with-jax">4. With <code>jax</code></a></li>
   <li><a href="#comparison" id="toc-comparison" class="nav-link" data-scroll-target="#comparison">5. Comparison</a></li>
@@ -223,7 +223,7 @@ u_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>u0[<span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>), <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(u0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>&lt;matplotlib.image.AxesImage at 0x12a3300d0&gt;</code></pre>
+<pre><code>&lt;matplotlib.image.AxesImage at 0x14d0aed90&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-3-output-2.png" width="435" height="414"></p>
@@ -260,8 +260,8 @@ but not like:
 ![](bad.png)
 -->
 </section>
-<section id="sparse-matrix" class="level2">
-<h2 class="anchored" data-anchor-id="sparse-matrix">2. Sparse matrix</h2>
+<section id="sparse-matrix-in-jax" class="level2">
+<h2 class="anchored" data-anchor-id="sparse-matrix-in-jax">2. Sparse matrix in JAX</h2>
 <p>In fact, the performance of Part 1 is supposed to be excruciatingly slow. While we can use the underlying optimized matrix multiplication routine from BLAS (basic linear algebra subprograms), it is not particularly effective here, as the matrix <code>A</code> has less than <span class="math inline">\(5N^2\)</span> nonzero elements out of <span class="math inline">\(N^4\)</span> elements. Most of operations are wasted for computing zeros. Let’s use the data structure that exploits a lot of zeros in the matrix <code>A</code>: sparse matrix data structures. The JAX package holds an experimental sparse matrix support. We can use the batched coordinate (<a href="https://jax.readthedocs.io/en/latest/jax.experimental.sparse.html"><code>BCOO</code></a>) format to only use <span class="math inline">\(O(N^2)\)</span> space for the matrix, and only take <span class="math inline">\(O(N^2)\)</span> time for each update.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>Let’s define <code>A_sp_matrix</code>, the matrix <code>A</code> in a sparse format, and repeat Part 1, and define a function <code>advance_time_spmatvec(u, epsilon)</code> in <code>heat_equations.py</code>.</p>
 <p>Run the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations.</p>
@@ -273,7 +273,7 @@ but not like:
 </section>
 <section id="with-jax" class="level2">
 <h2 class="anchored" data-anchor-id="with-jax">4. With <code>jax</code></h2>
-<p>Now, let’s use <code>jax</code> to solve the same problem using <code>@jit</code>, defining a function <code>advance_time_jax(u, alpha)</code> in <code>heat_equations.py</code>.</p>
+<p>Now, let’s use <code>jax</code> to solve the same problem using <code>@jit</code>, defining a function <code>advance_time_jax(u, alpha)</code> in <code>heat_equations.py</code> – without using (sparse) matrix multiplication routines.</p>
 <p>Run the code for 2700 iterations. How long does it take? It is a good idea to first run it for a small number of iterations to get it compiled, and then run it again with the full 2700 iterations to get high performance with precompiled code. It is possible to make it faster than Part 2, excluding the compilation time. Visualize the diffusion of heat every 300 iterations.</p>
 </section>
 <section id="comparison" class="level2">
