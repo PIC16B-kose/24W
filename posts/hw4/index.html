@@ -223,7 +223,7 @@ u_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>u0[<span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>), <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(u0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>&lt;matplotlib.image.AxesImage at 0x14d0aed90&gt;</code></pre>
+<pre><code>&lt;matplotlib.image.AxesImage at 0x16834b690&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-3-output-2.png" width="435" height="414"></p>
@@ -273,7 +273,7 @@ but not like:
 </section>
 <section id="with-jax" class="level2">
 <h2 class="anchored" data-anchor-id="with-jax">4. With <code>jax</code></h2>
-<p>Now, let’s use <code>jax</code> to solve the same problem using <code>@jit</code>, defining a function <code>advance_time_jax(u, alpha)</code> in <code>heat_equations.py</code> – without using (sparse) matrix multiplication routines.</p>
+<p>Now, let’s use <code>jax</code> to do the similar using just-in-time compilation, defining a function <code>advance_time_jax(u, alpha)</code> in <code>heat_equations.py</code> – without using (sparse) matrix multiplication routines.</p>
 <p>Run the code for 2700 iterations. How long does it take? It is a good idea to first run it for a small number of iterations to get it compiled, and then run it again with the full 2700 iterations to get high performance with precompiled code. It is possible to make it faster than Part 2, excluding the compilation time. Visualize the diffusion of heat every 300 iterations.</p>
 </section>
 <section id="comparison" class="level2">
