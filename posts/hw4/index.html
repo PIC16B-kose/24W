@@ -208,7 +208,7 @@ x_i = i \Delta x,\;\; y_j = j \Delta y,\;\; t_k = k \Delta t,
 u_{i, j}^{k+1} \approx u_{i, j}^k + \epsilon \left(u_{i+1, j}^k  + u_{i-1, j}^k + u_{i, j+1}^k + u_{i, j-1}^k - 4 u_{i, j}^k\right),
 \]</span> where <span class="math inline">\(\epsilon\)</span> is a small parameter. The boundary condition can be constructed to allow heat to escape, as follows: <span class="math display">\[
 u_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.
-\]</span> We are not explicitly allocating space for <span class="math inline">\(u_{-1, j}^k\)</span>, <span class="math inline">\(u_{N, j}^k\)</span>, <span class="math inline">\(u_{i, -1}^k\)</span>, or <span class="math inline">\(u_{i, N}^k\)</span>.</p>
+\]</span> We are not explicitly allocating space for <span class="math inline">\(u_{-1, j}^k\)</span>, <span class="math inline">\(u_{N, j}^k\)</span>, <span class="math inline">\(u_{i, -1}^k\)</span>, or <span class="math inline">\(u_{i, N}^k\)</span>. (Note: the index -1 here does not mean the last index as in Python indexing; it just means <span class="math inline">\(x = - \Delta x\)</span> or <span class="math inline">\(y = - \Delta y\)</span>.)</p>
 <p>For this homework, we will use:</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
@@ -223,7 +223,7 @@ u_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>u0[<span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>), <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(u0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>&lt;matplotlib.image.AxesImage at 0x16834b690&gt;</code></pre>
+<pre><code>&lt;matplotlib.image.AxesImage at 0x140c21690&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-3-output-2.png" width="435" height="414"></p>
@@ -232,24 +232,17 @@ u_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.
 <section id="with-matrix-multiplication" class="level2">
 <h2 class="anchored" data-anchor-id="with-matrix-multiplication">1. With matrix multiplication</h2>
 <p>As in the linear algebra lecture, let’s use matrix-vector multiplication to simulate the heat diffusion in the 2D space. The vector here is created by <code>flatten</code>ing the current solution <span class="math inline">\(u_{i, j}^k\)</span>. Each iteration of the update is given by:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> advance_time_matvecmul(u, epsilon):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Advances the simulation by one timestep, via matrix-vector multiplication</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">        u: N x N grid state at timestep k</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">        epsilon: stability constant</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">        N x N Grid state at instant k+1</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> u <span class="op">+</span> epsilon <span class="op">*</span> (A <span class="op">@</span> u.flatten()).reshape((N, N))</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> advance_time_matvecmul(A, u, epsilon):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> u <span class="op">+</span> epsilon <span class="op">*</span> (A <span class="op">@</span> u.flatten()).reshape((N, N))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>That is, we view <span class="math inline">\(u_{i, j}^k\)</span> as the element with index <span class="math inline">\(N \times i + j\)</span> in a vector of length <span class="math inline">\(N^2\)</span>. Put this function in the file <code>heat_equations.py</code>. Let’s follow the indexing used in the update equation above. The matrix <code>A</code> has the size of <span class="math inline">\(N^2 \times N^2\)</span>, without all-zero rows or all-zero columns. The corresponding matrix <code>A</code> is given by:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> N <span class="op">*</span> N</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>diagonals <span class="op">=</span> [<span class="op">-</span><span class="dv">4</span> <span class="op">*</span> np.ones(n), np.ones(n<span class="op">-</span><span class="dv">1</span>), np.ones(n<span class="op">-</span><span class="dv">1</span>), np.ones(n<span class="op">-</span>N), np.ones(n<span class="op">-</span>N)]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>diagonals[<span class="dv">1</span>][(N<span class="op">-</span><span class="dv">1</span>)::N] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>diagonals[<span class="dv">2</span>][(N<span class="op">-</span><span class="dv">1</span>)::N] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.diag(diagonals[<span class="dv">0</span>]) <span class="op">+</span> np.diag(diagonals[<span class="dv">1</span>], <span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">2</span>], <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">3</span>], N) <span class="op">+</span> np.diag(diagonals[<span class="dv">4</span>], <span class="op">-</span>N)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Run the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations. Since our grading is PDF-based, please use a 3x3 grid of 2D heatmaps or contour plots. You are welcome to create an animation later. Since we want to compare computation time between multiple methods, we should not count the time needed for visualization. Thus, we need to store the intermediate solutions in a separate array.</p>
+<p>Define a function <code>get_A(N)</code>, that takes the value <code>N</code> as the argument and returns the corresponding matrix <code>A</code> in <code>heat_equation.py</code>.</p>
+<p>Let’s run the simulation with <code>get_A()</code> and <code>advance_time_matvecmul()</code> we defined. Run the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations. Since our grading is PDF-based, please use a 3x3 grid of 2D heatmaps or contour plots. You are welcome to create an animation later. Since we want to compare computation time between multiple methods, we should not count the time needed for visualization. Thus, we need to store the intermediate solutions in a separate array.</p>
 <!--
 At the end of the run, your solution should be symmetric and invariant under 90-degree rotations. It should look like:
 
@@ -263,17 +256,17 @@ but not like:
 <section id="sparse-matrix-in-jax" class="level2">
 <h2 class="anchored" data-anchor-id="sparse-matrix-in-jax">2. Sparse matrix in JAX</h2>
 <p>In fact, the performance of Part 1 is supposed to be excruciatingly slow. While we can use the underlying optimized matrix multiplication routine from BLAS (basic linear algebra subprograms), it is not particularly effective here, as the matrix <code>A</code> has less than <span class="math inline">\(5N^2\)</span> nonzero elements out of <span class="math inline">\(N^4\)</span> elements. Most of operations are wasted for computing zeros. Let’s use the data structure that exploits a lot of zeros in the matrix <code>A</code>: sparse matrix data structures. The JAX package holds an experimental sparse matrix support. We can use the batched coordinate (<a href="https://jax.readthedocs.io/en/latest/jax.experimental.sparse.html"><code>BCOO</code></a>) format to only use <span class="math inline">\(O(N^2)\)</span> space for the matrix, and only take <span class="math inline">\(O(N^2)\)</span> time for each update.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>Let’s define <code>A_sp_matrix</code>, the matrix <code>A</code> in a sparse format, and repeat Part 1, and define a function <code>advance_time_spmatvec(u, epsilon)</code> in <code>heat_equations.py</code>.</p>
+<p>Let’s define the function <code>get_A_sparse(N)</code>, a function that returns <code>A_sp_matrix</code>, the matrix <code>A</code> in a sparse format, given <code>N</code> in <code>heat_equation.py</code>. Repeat Part 1 using <code>get_A_sparse()</code> and the <code>jit</code>-ed version of <code>advance_time_matvecmul</code>.</p>
 <p>Run the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations.</p>
 </section>
 <section id="direct-operation-with-numpy" class="level2">
 <h2 class="anchored" data-anchor-id="direct-operation-with-numpy">3. Direct operation with <code>numpy</code></h2>
-<p>The matrix-vector multiplication approach is useful, particularly in other PDE problems like Poisson equations, where the matrix equation has to be solved. However, with the heat equation, it is not something absolutely necessary in terms of computation. It could be simpler with vectorized array operations like <code>np.roll()</code>. Write a function <code>advance_time_roll(u, alpha)</code> that advances the solution by one timestep in the file <code>heat_equations.py</code>. You may append the boundary conditions to form an <span class="math inline">\((N + 2) \times (N + 2)\)</span> array internally, but the argument and the returned solution should be <span class="math inline">\(N \times N\)</span>.</p>
+<p>The matrix-vector multiplication approach is useful, particularly in other PDE problems like Poisson equations, where the matrix equation has to be solved. However, with the heat equation, it is not something absolutely necessary in terms of computation. It could be simpler with vectorized array operations like <code>np.roll()</code>. Write a function <code>advance_time_numpy(u, alpha)</code> that advances the solution by one timestep in the file <code>heat_equations.py</code>. You may pad zeroes to the input array to form an <span class="math inline">\((N + 2) \times (N + 2)\)</span> array internally, but the argument and the returned solution should still be <span class="math inline">\(N \times N\)</span>.</p>
 <p>Run the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations.</p>
 </section>
 <section id="with-jax" class="level2">
 <h2 class="anchored" data-anchor-id="with-jax">4. With <code>jax</code></h2>
-<p>Now, let’s use <code>jax</code> to do the similar using just-in-time compilation, defining a function <code>advance_time_jax(u, alpha)</code> in <code>heat_equations.py</code> – without using (sparse) matrix multiplication routines.</p>
+<p>Now, let’s use <code>jax</code> to do the similar using just-in-time compilation, defining a function <code>advance_time_jax(u, alpha)</code> in <code>heat_equations.py</code> – without using (sparse) matrix multiplication routines. It will be simple to use the function <code>advance_time_numpy()</code> as the starting point. However, keep in mind that <code>jax</code> does not support index assignment.</p>
 <p>Run the code for 2700 iterations. How long does it take? It is a good idea to first run it for a small number of iterations to get it compiled, and then run it again with the full 2700 iterations to get high performance with precompiled code. It is possible to make it faster than Part 2, excluding the compilation time. Visualize the diffusion of heat every 300 iterations.</p>
 </section>
 <section id="comparison" class="level2">
@@ -286,14 +279,14 @@ but not like:
 <section id="format" class="level2">
 <h2 class="anchored" data-anchor-id="format">Format</h2>
 <ol start="0" type="1">
-<li>As always, please submit the PDF printout of your blog post and any code you wrote to the <code>files</code> window. Please submit the file <code>heat_equations.py</code> to the autograder. Autograder will be up after Feb 13.</li>
+<li>As always, please submit the PDF printout of your blog post and any code you wrote (other than the <code>heat_equation module</code>) to the <code>files</code> window. Please submit the file <code>heat_equations.py</code> to the autograder.</li>
 </ol>
 </section>
 <section id="coding-problem" class="level2">
 <h2 class="anchored" data-anchor-id="coding-problem">Coding Problem</h2>
 <ol type="1">
 <li>The functions work correctly – checked by autograder.</li>
-<li>The contents of all four functions are displayed in the blog post with <code>inspect.getsource()</code>.</li>
+<li>The contents of all the functions are displayed in the blog post with <code>inspect.getsource()</code>.</li>
 </ol>
 <section id="part-1" class="level3">
 <h3 class="anchored" data-anchor-id="part-1">Part 1</h3>
@@ -307,20 +300,22 @@ but not like:
 <ol start="5" type="1">
 <li>The function is implemented as required.</li>
 <li>The time elapsed is shown, excluding time used for visualization.</li>
-<li>They should be at least 100x faster than Part 1.</li>
+<li>Part 2 should be at least 10x faster than Part 1.</li>
+<li>Part 3 should be at least 100x faster than Part 1.</li>
+<li>Part 4 should be about twice as fast as Part 3.</li>
 <li>The visualized solution appears correct.</li>
 </ol>
 </section>
 <section id="part-5" class="level3">
 <h3 class="anchored" data-anchor-id="part-5">Part 5</h3>
-<ol start="9" type="1">
+<ol start="11" type="1">
 <li>The four implementations and their performances are compared.</li>
 </ol>
 </section>
 </section>
 <section id="style-and-documentation" class="level2">
 <h2 class="anchored" data-anchor-id="style-and-documentation">Style and Documentation</h2>
-<ol start="10" type="1">
+<ol start="12" type="1">
 <li>Code throughout is written using minimal repetition and clean style.</li>
 <li>Docstrings are helpful.</li>
 <li>Please make sure to include useful comments and detailed explanations for each of your code blocks.</li>
@@ -329,7 +324,7 @@ but not like:
 </section>
 <section id="writing" class="level2">
 <h2 class="anchored" data-anchor-id="writing">Writing</h2>
-<ol start="14" type="1">
+<ol start="16" type="1">
 <li>The blog post is written in tutorial format, in engaging and clear English. Grammar and spelling errors are acceptable within reason.</li>
 </ol>
 
@@ -341,7 +336,7 @@ but not like:
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>There are several sparse matrix representations for more general sparsity patterns, including CSR (Compressed Sparse Row), CSC (Compressed Sparse Column), COO (COOrdinate format), etc.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>There are several sparse matrix representations for more general sparsity patterns, including CSR (Compressed Sparse Row), CSC (Compressed Sparse Column), COO (COOrdinate format), etc. They are available in <code>scipy</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
