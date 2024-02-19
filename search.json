@@ -382,7 +382,7 @@
     "href": "posts/hw5/index.html#format",
     "title": "Homework 5: Image Classification",
     "section": "Format",
-    "text": "Format\n\nThere is no autograder for this homework. Please submit the PDF printout of your blog post and any code you wrote."
+    "text": "Format\n\nThere is no autograder for this homework. Please submit the PDF printout of your blog post to the “pdf” window and any code you wrote to the “files” window – including index.ipynb and index.py."
   },
   {
     "objectID": "posts/hw5/index.html#coding-problem",
