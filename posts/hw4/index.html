@@ -223,7 +223,7 @@ u_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>u0[<span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>), <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(u0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>&lt;matplotlib.image.AxesImage at 0x123ddb690&gt;</code></pre>
+<pre><code>&lt;matplotlib.image.AxesImage at 0x12ed3bfd0&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-3-output-2.png" width="435" height="414"></p>
@@ -231,7 +231,7 @@ u_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.
 </div>
 <section id="with-matrix-multiplication" class="level2">
 <h2 class="anchored" data-anchor-id="with-matrix-multiplication">1. With matrix multiplication</h2>
-<p>As in the linear algebra lecture, let’s use matrix-vector multiplication to simulate the heat diffusion in the 2D space. The vector here is created by <code>flatten</code>ing the current solution <span class="math inline">\(u_{i, j}^k\)</span>. Each iteration of the update is given by:</p>
+<p>As in the linear algebra lecture, let’s use matrix-vector multiplication to simulate the heat diffusion in the 2D space. The vector here is created by <code>flatten</code>ing the current solution <span class="math inline">\(u_{i, j}^k\)</span>. Each iteration of the update is given by: (EDITED 2/20)</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> advance_time_matvecmul(A, u, epsilon):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Advances the simulation by one timestep, via matrix-vector multiplication</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
