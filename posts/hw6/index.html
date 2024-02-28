@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-02-26">
+<meta name="dcterms.date" content="2024-02-27">
 
 <title>UCLA PIC 16B Lec 1, Winter 2024 - Homework 6: Fake News Classification</title>
 <style>
@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 26, 2024</p>
+        <p class="date">February 27, 2024</p>
       </div>
     </div>
     
@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>Rampant misinformation — often called “fake news” — is one of the defining features of contemporary democratic life. In this Blog Post, you will develop and assess a fake news classifier using Tensorflow.</p>
+<p>Rampant misinformation — often called “fake news” — is one of the defining features of contemporary democratic life. In this Blog Post, you will develop and assess a fake news classifier using Keras.</p>
 <p><em>Note: Working on this Blog Post in Google Colab is highly recommended.</em></p>
 <section id="data-source" class="level2">
 <h2 class="anchored" data-anchor-id="data-source">Data Source</h2>
@@ -227,18 +227,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Instructions</h1>
 <section id="acquire-training-data" class="level2">
 <h2 class="anchored" data-anchor-id="acquire-training-data">1. Acquire Training Data</h2>
-<p>I have hosted a training data set at the below URL. You can either read it into Python directly (via <code>pd.read_csv()</code>) or download it to your computer and read it from disk.</p>
+<p>The dataset hosted a training data set at the below URL. You can either read it into Python directly (via <code>pd.read_csv()</code>) or download it to your computer and read it from disk.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>train_url <span class="op">=</span> <span class="st">"https://github.com/PhilChodrow/PIC16b/blob/master/datasets/fake_news_train.csv?raw=true"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Each row of the data corresponds to an article. The <code>title</code> column gives the title of the article, while the <code>text</code> column gives the full article text. The final column, called <code>fake</code>, is <code>0</code> if the article is true and <code>1</code> if the article contains fake news, as determined by the authors of the paper above.</p>
 </section>
 <section id="make-a-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="make-a-dataset">2. Make a Dataset</h2>
-<p>Write a function called <code>make_dataset</code>. This function should do two things:</p>
+<p>Write a function called <code>make_dataset</code>. This function should do three things:</p>
 <ol type="1">
+<li>Change the text to lowercase.</li>
 <li><em>Remove stopwords</em> from the article <code>text</code> and <code>title</code>. A stopword is a word that is usually considered to be uninformative, such as “the,” “and,” or “but.” You may find <a href="https://stackoverflow.com/questions/29523254/python-remove-stop-words-from-pandas-dataframe">this StackOverFlow thread</a> to be helpful.</li>
-<li>Construct and return a <code>tf.data.Dataset</code> with two inputs and one output. The input should be of the form <code>(title, text)</code>, and the output should consist only of the <code>fake</code> column. You may find it helpful to consult lecture notes or <a href="https://www.tensorflow.org/guide/keras/functional">this tutorial</a> for reference on how to construct and use <code>Dataset</code>s with multiple inputs.</li>
+<li>Construct and return a <code>tf.data.Dataset</code> with two inputs and one output. The input should be of the form <code>(title, text)</code>, and the output should consist only of the <code>fake</code> column. You may find it helpful to consult lecture notes or <a href="https://keras.io/guides/functional_api/">this tutorial</a> for reference on how to construct and use <code>Dataset</code>s with multiple inputs.</li>
 </ol>
-<p>Call the function <code>make_dataset</code> on your training dataframe to produce a <code>Dataset</code>. You may wish to <code>batch</code> your <code>Dataset</code> prior to returning it, which can be done like this: <code>my_data_set.batch(100)</code>. Batching causes your model to train on chunks of data rather than individual rows. This can sometimes reduce accuracy, but can also greatly increase the speed of training. Finding a balance is key. I found batches of 100 rows to work well.</p>
+<p>Call the function <code>make_dataset</code> on your training dataframe to produce a <code>tf.data.Dataset</code>. You may wish to <code>batch</code> your <code>Dataset</code> prior to returning it, which can be done like this: <code>my_data_set.batch(100)</code>. Batching causes your model to train on chunks of data rather than individual rows. This can sometimes reduce accuracy, but can also greatly increase the speed of training. Finding a balance is key. I found batches of 100 rows to work well.</p>
 <section id="validation-data" class="level3">
 <h3 class="anchored" data-anchor-id="validation-data">Validation Data</h3>
 <p>After you’ve constructed your primary <code>Dataset</code>, split of 20% of it to use for validation.</p>
@@ -281,16 +282,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>In the third model, you should use <strong>both the article title and the article text</strong> as input.</li>
 </ol>
 <p>Train your models on the training data until they appear to be “fully” trained. Assess and compare their performance. Make sure to include a visualization of the training histories.</p>
-<p>You can visualize your models with this code:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> utils</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>utils.plot_model(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Visualize your model. You can visualize your models with this code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras <span class="im">import</span> utils</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>utils.plot_model(model, <span class="st">"output_filename.png"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                       show_shapes<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                       show_layer_names<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="notes" class="level3">
 <h3 class="anchored" data-anchor-id="notes">Notes</h3>
 <ul>
 <li>For the first two models, you don’t have to create new <code>Dataset</code>s. Instead, just specify the <code>inputs</code> to the <code>keras.Model</code> appropriately, and TensorFlow will automatically ignore the unused inputs in the <code>Dataset</code>.</li>
 <li>The lecture notes and tutorials linked above are likely to be helpful as you are creating your models as well.</li>
 <li><strong>You will need to use the Functional API, rather than the Sequential API, for this modeling task.</strong></li>
-<li>When using the Functional API, it is possible to use the same layer in multiple parts of your model; see <a href="https://www.tensorflow.org/guide/keras/functional">this tutorial</a> for examples. I recommended that you share an embedding layer for both the article <code>title</code> and <code>text</code> inputs.</li>
+<li>When using the Functional API, it is possible to use the same layer in multiple parts of your model; see <a href="https://keras.io/guides/functional_api/">this tutorial</a> for examples. I recommended that you share a text vectorization layer and an embedding layer for both the article <code>title</code> and <code>text</code> inputs.
+<ul>
+<li><strong>Note:</strong> Do not use the shared embedding layer with separate text vectorization layers. If you do so, you will be embedding two different words on the same coordinate.</li>
+</ul></li>
 <li><strong>You may encounter overfitting</strong>, in which case Dropout layers can help.</li>
 </ul>
 <p>You’re free to be creative when designing your models. If you’re feeling very stuck, start with some of the pipelines for processing text that we’ve seen in lecture, and iterate from there. Please include in your discussion some of the things that you tried and how you determined the models you used.</p>
@@ -325,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="format" class="level2">
 <h2 class="anchored" data-anchor-id="format">Format</h2>
 <ol start="0" type="1">
-<li>As always, please submit the PDF printout of your blog post and any code you wrote.</li>
+<li>There is no autograder for this homework. Please submit the PDF printout of your blog post to the “pdf” window and any code you wrote to the “files” window – including <code>index.ipynb</code> and <code>index.py</code>.</li>
 </ol>
 </section>
 <section id="coding-problem" class="level2">
@@ -346,8 +352,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Model 1 uses only the article title.</li>
 <li>Model 2 uses only the article text.</li>
 <li>Model 3 uses both the article title and text.</li>
-<li>For model 3, embedding is consistent with the text vectorization method. E.g., output from two different <code>TextVectorization</code> layers should not be fed into the same <code>Embedding</code> layer, and the output from the same <code>TextVectorization</code> layers should be fed into the same <code>Embedding</code> layer.</li>
-<li>The training history is shown for each of the three models, including the training and validation performance.</li>
+<li>For model 3, embedding is consistent with the text vectorization method. i.e., if you use shared embedding layer, the preceding text vectorization layer also should be shared.</li>
+<li>The training history is plotted for each of the three models, including the training and validation performance.</li>
+<li>The models are visualized, with output shapes and layer names visible for each layer.</li>
 <li>The most performant model is evaluated on the test data set.</li>
 <li>The best model consistently obtains at least 97% accuracy on the validation set.</li>
 <li>The best model’s performance on the test set is shown.</li>
@@ -355,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="embedding-visualization-1" class="level3">
 <h3 class="anchored" data-anchor-id="embedding-visualization-1">Embedding Visualization</h3>
-<ol start="14" type="1">
+<ol start="15" type="1">
 <li>A visualization of the learned word embedding is shown.</li>
 <li>The written text discusses at least 5 words whose location is interpretable within the embedding.</li>
 </ol>
@@ -363,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="style-and-documentation" class="level2">
 <h2 class="anchored" data-anchor-id="style-and-documentation">Style and Documentation</h2>
-<ol start="16" type="1">
+<ol start="17" type="1">
 <li>Code throughout is written using minimal repetition and clean style.</li>
 <li>Docstrings are not required in this Blog Post, but please make sure to include useful comments and detailed explanations for each of your code blocks.</li>
 <li>Any repeated operations should be enclosed in functions, regardless of whether they are explicitly required in the instructions.</li>
@@ -371,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="writing" class="level2">
 <h2 class="anchored" data-anchor-id="writing">Writing</h2>
-<ol start="19" type="1">
+<ol start="20" type="1">
 <li>The blog post is written in tutorial format, in engaging and clear English. Grammar and spelling errors are acceptable within reason.</li>
 </ol>
 
