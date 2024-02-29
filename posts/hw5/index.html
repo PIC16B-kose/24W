@@ -184,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#first-model" id="toc-first-model" class="nav-link" data-scroll-target="#first-model">2. First Model</a></li>
   <li><a href="#model-with-data-augmentation" id="toc-model-with-data-augmentation" class="nav-link" data-scroll-target="#model-with-data-augmentation">3. Model with Data Augmentation</a></li>
-  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">4. Data Preprocessing</a></li>
+  <li><a href="#data-preprocessing-modified-228" id="toc-data-preprocessing-modified-228" class="nav-link" data-scroll-target="#data-preprocessing-modified-228">4. Data Preprocessing (MODIFIED 2/28)</a></li>
   <li><a href="#transfer-learning" id="toc-transfer-learning" class="nav-link" data-scroll-target="#transfer-learning">5. Transfer Learning</a></li>
   <li><a href="#score-on-test-data" id="toc-score-on-test-data" class="nav-link" data-scroll-target="#score-on-test-data">6. Score on Test Data</a></li>
   <li><a href="#write-your-blog-post" id="toc-write-your-blog-post" class="nav-link" data-scroll-target="#write-your-blog-post">7. Write Your Blog Post</a></li>
@@ -300,13 +300,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Comment again on overfitting. Do you observe overfitting in <code>model2</code>?</li>
 </ol>
 </section>
-<section id="data-preprocessing" class="level2">
-<h2 class="anchored" data-anchor-id="data-preprocessing">4. Data Preprocessing</h2>
+<section id="data-preprocessing-modified-228" class="level2">
+<h2 class="anchored" data-anchor-id="data-preprocessing-modified-228">4. Data Preprocessing (MODIFIED 2/28)</h2>
 <p>Sometimes, it can be helpful to make simple transformations to the input data. For example, in this case, the original data has pixels with RGB values between 0 and 255, but many models will train faster with RGB values normalized between 0 and 1, or possibly between -1 and 1. These are mathematically identical situations, since we can always just scale the weights. But if we handle the scaling prior to the training process, we can spend more of our training energy handling actual signal in the data and less energy having the weights adjust to the data scale.</p>
 <p>The following code will create a preprocessing layer called <code>preprocessor</code> which you can slot into your model pipeline.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> keras.applications.mobilenet_v3.preprocess_input(i)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> keras.Model(inputs <span class="op">=</span> [i], outputs <span class="op">=</span> [x])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The pixel values have the range of (0, 255), but many models will work better if rescaled to (-1, 1.)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># outputs: `(inputs * scale) + offset`</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>scale_layer <span class="op">=</span> keras.layers.Rescaling(scale<span class="op">=</span><span class="dv">1</span> <span class="op">/</span> <span class="fl">127.5</span>, offset<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> scale_layer(i)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> keras.Model(inputs <span class="op">=</span> [i], outputs <span class="op">=</span> [x])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I suggest incorporating the <code>preprocessor</code> layer as the very first layer, before the data augmentation layers. Call the resulting model <code>model3</code>.</p>
 <p>Now, train this model and visualize the training history. This time, please make sure that you are able to achieve <strong>at least</strong> 80% validation accuracy.</p>
 <ol type="1">
@@ -328,10 +331,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> keras.Input(shape<span class="op">=</span>IMG_SHAPE)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> base_model(i, training <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>base_model_layer <span class="op">=</span> keras.Model(inputs <span class="op">=</span> [i], outputs <span class="op">=</span> [x])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>base_model_layer <span class="op">=</span> keras.Model(inputs <span class="op">=</span> i, outputs <span class="op">=</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now, create a model called <code>model4</code> that uses <code>MobileNetV3Large</code>. For this, you should definitely use the following layers:</p>
 <ol type="1">
-<li>The <code>preprocessor</code> layer from Part §4.</li>
+<li><del>The <code>preprocessor</code> layer from Part §4.</del> REMOVED 2/28: preprocessing layers are included in <code>MobileNetV3Large</code>.</li>
 <li>The data augmentation layers from Part §3.</li>
 <li>The <code>base_model_layer</code> constructed above.</li>
 <li>A <code>Dense(2)</code> layer at the very end to actually perform the classification.</li>
