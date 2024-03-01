@@ -309,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># outputs: `(inputs * scale) + offset`</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>scale_layer <span class="op">=</span> keras.layers.Rescaling(scale<span class="op">=</span><span class="dv">1</span> <span class="op">/</span> <span class="fl">127.5</span>, offset<span class="op">=-</span><span class="dv">1</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> scale_layer(i)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> keras.Model(inputs <span class="op">=</span> [i], outputs <span class="op">=</span> [x])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> keras.Model(inputs <span class="op">=</span> i, outputs <span class="op">=</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I suggest incorporating the <code>preprocessor</code> layer as the very first layer, before the data augmentation layers. Call the resulting model <code>model3</code>.</p>
 <p>Now, train this model and visualize the training history. This time, please make sure that you are able to achieve <strong>at least</strong> 80% validation accuracy.</p>
 <ol type="1">
