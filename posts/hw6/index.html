@@ -271,11 +271,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="create-models" class="level2">
 <h2 class="anchored" data-anchor-id="create-models">3. Create Models</h2>
-<p>Please use TensorFlow models to offer a perspective on the following question:</p>
+<p>Please use Keras models to offer a perspective on the following question:</p>
 <blockquote class="blockquote">
 <p>When detecting fake news, is it most effective to focus on only the title of the article, the full text of the article, or both?</p>
 </blockquote>
-<p>To address this question, create <strong>three (3)</strong> TensorFlow models.</p>
+<p>To address this question, create <strong>three (3)</strong> Keras models.</p>
 <ol type="1">
 <li>In the first model, you should use <strong>only the article title</strong> as an input.</li>
 <li>In the second model, you should use <strong>only the article text</strong> as an input.</li>
@@ -290,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="notes" class="level3">
 <h3 class="anchored" data-anchor-id="notes">Notes</h3>
 <ul>
-<li>For the first two models, you don’t have to create new <code>Dataset</code>s. Instead, just specify the <code>inputs</code> to the <code>keras.Model</code> appropriately, and TensorFlow will automatically ignore the unused inputs in the <code>Dataset</code>.</li>
+<li>For the first two models, you don’t have to create new <code>Dataset</code>s. Instead, just specify the <code>inputs</code> to the <code>keras.Model</code> appropriately, and Keras will automatically ignore the unused inputs in the <code>Dataset</code>.</li>
 <li>The lecture notes and tutorials linked above are likely to be helpful as you are creating your models as well.</li>
 <li><strong>You will need to use the Functional API, rather than the Sequential API, for this modeling task.</strong></li>
 <li>When using the Functional API, it is possible to use the same layer in multiple parts of your model; see <a href="https://keras.io/guides/functional_api/">this tutorial</a> for examples. I recommended that you share a text vectorization layer and an embedding layer for both the article <code>title</code> and <code>text</code> inputs.
