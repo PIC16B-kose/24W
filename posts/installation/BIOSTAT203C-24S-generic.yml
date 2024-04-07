@@ -1,0 +1,24 @@
+name: BIOSTAT203C-24S
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.6
+  - nb_conda=2.2.1
+  - nb_conda_kernels=2.3.1
+  - pandas=2.0.3
+  - matplotlib=3.7.2
+  - scikit-learn=1.3.0
+  - seaborn=0.12.2
+  - plotly=5.15.0
+  - scrapy=2.8.0
+  - twisted=22.10.0
+  - flask=3.0.0
+  - jinja2=3.1.2
+  - jupyter_client=7.4.9
+  - jupyter_core=5.3.0
+  - jupyter_server=1.23.4
+  - jupyterlab=3.6.3
+  - notebook=6.5.4
+  - jax=0.4.23
+prefix: /Users/kose/anaconda3/envs/BIOSTAT203C-24S

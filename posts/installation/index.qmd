@@ -60,8 +60,9 @@ This will create a new environment PIC16B-24W, and I will use that environment i
 Full environment for each OS:
 
 - [Windows](https://raw.githubusercontent.com/PIC16B-ucla/24W/main/posts/installation/PIC16B-24W-Windows.yml)
-- [Mac](https://raw.githubusercontent.com/PIC16B-ucla/24W/main/posts/installation/PIC16B-24W-mac.yml)
+- [Mac M1/M2](https://raw.githubusercontent.com/PIC16B-ucla/24W/main/posts/installation/PIC16B-24W-mac.yml)
 - [Ubuntu Linux](https://raw.githubusercontent.com/PIC16B-ucla/24W/main/posts/installation/PIC16B-24W-ubuntu.yml)
+- [Generic](https://github.com/PIC16B-ucla/24W/blob/main/posts/installation/PIC16B-24W-generic.yml) -- e.g., Mac with Intel chip (sorry, I no longer own one). You may want to change conda's environment solver to [mamba](https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community) for faster installation. (Updated 1/10)
 
 Note that an autograder will be in use for this course, set up on Ubuntu Linux.
 
